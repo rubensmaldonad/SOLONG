@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_strrncmp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmaldona <rmaldona@student42.rio>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:17:56 by rmaldona          #+#    #+#             */
-/*   Updated: 2022/10/17 15:06:21 by rmaldona         ###   ########.fr       */
+/*   Created: 2022/11/21 14:37:28 by rmaldona          #+#    #+#             */
+/*   Updated: 2022/11/21 15:07:31 by rmaldona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-
-void	render map(struct, char *patch)
+int	ft_strrncmp(const char *s1, const char *s2, size_t n)
 {
-	int		fd;
-	char	*gnl;
-	int		x;
-	int		y;
-	char	**map;
+	size_t	i;
+	size_t	j;
 
-	x = 0;
-	fd = open(patch, O_RDONLY);
-	gnl = get_next_line(fd);
-	y = strlen(gnl - 1);
-	map = malloc((y + 1) * sizeof (char *));
-	map[x] = gnl;
-
-	while (x)
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	while (n)
 	{
-		gnl= get_next_line(fd);
-		map[x] = gnl;
+		if (s1[i] == s2[j])
+		{
+			n--;
+			i--;
+			j--;
+		}
+		else
+			return (s1[i] - s2[j]);
 	}
+	return (0);
 }

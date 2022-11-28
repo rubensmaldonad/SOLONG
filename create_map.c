@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   teste.c                                            :+:      :+:    :+:   */
+/*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmaldona <rmaldona@student42.rio>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:49:53 by rmaldona          #+#    #+#             */
-/*   Updated: 2022/11/24 19:07:39 by rmaldona         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:49:04 by rmaldona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ void create_map(t_game *game, char **argv)
 		game->col = ft_strlen(line) - 1;
 	}
 	game->map = ft_split(bigline, '\n');
-	draw_map(game, bigline);
-}
+	game->mapcopy = ft_split(bigline, '\n');
 
-void	draw_map(t_game *game, char *bigline)
-{
 	size_t	len;
-	size_t	lenmap;
-	size_t	linemap;
+	int	lenmap;
+	int	linemap;
+	size_t	contp;
+	int		contc;
+	int		conte;
 
+	contp = 0;
+	contc = 0;
+	conte = 0;
 	lenmap = game->col - 1;
 	linemap = game->lin - 2;
 	if (game->col == game->lin)
@@ -67,32 +70,69 @@ void	draw_map(t_game *game, char *bigline)
 				linemap--;
 		}
 	}
-	game->map == game->mapcopy;
-	check_caracter(bigline, len);
-}
-
-void	check_caracter(char *bigline, size_t len)
-{
-	size_t	contp;
-	int		contc;
-	int		conte;
-
-	contp = 0;
-	contc = 0;
-	conte = 0;
 	while (bigline[--len] != 0)
 	{
 		if (!ft_strchr("PEC01\n", bigline[len]))
 			m_error("invalid caracter");
 		if (bigline[len] == 'P')
+		{
 			contp++;
+		}
 		if (bigline[len] == 'C')
+		{
 			contc++;
+		}
 		if (bigline[len] == 'E')
+		{
 			conte++;
+		}
 	}
 	if (contp != 1 || conte != 1 || contc == 0)
 		m_error("missing caracter");
+	int px = 0;
+	int py = 0;
+	while (game->map[px][py] != 'P')
+	{
+		py = 0;
+		while(game->map[px][py] != '\0' && game->map[px][py] != '\n')
+		{
+			if (game->map[px][py] == 'P')
+				break;
+			py++;
+		}
+		if (game->map[px][py] == 'P')
+				break;
+		px++;
+	}
+	count_elements(game, contc, px, py);
+	compare(game, contc);
+	
+}
+
+void	count_elements(t_game *game, int contc, int px, int py)
+{
+	if (game->mapcopy[px][py] == '1')
+		return;
+	if (game->mapcopy[px][py] == 'E')
+			game->exit_count++;
+	if (game->mapcopy[px][py] == 'C')
+		game->coin_count++;
+	game->mapcopy[px][py] = '1';
+	count_elements(game, contc, px + 1, py);
+	count_elements(game, contc, px - 1, py);
+	count_elements(game, contc, px, py + 1);
+	count_elements(game, contc, px, py - 1);
+}
+
+void	compare(t_game *game, int contc)
+{
+	if (game->coin_count != contc)
+	{
+		printf("\n\ncontc = %i\n", contc);
+		printf("\n\ncoinc = %i\n", game->coin_count);
+		m_error("ROTA NÃO VÁLIDA");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	m_error(char *msg)
@@ -105,18 +145,16 @@ void	m_error(char *msg)
 int main(int argc, char **argv)
 {
 	int i = 0;
-
 	t_game game;
 	if (argc == 2)
 	{
 		create_map(&game, argv);
 
-		while (game.map[i])
+		while (game.map[i] && game.mapcopy[i])
 		{
-			printf("%s\n", game.map[i]);
+			printf("\n\n%s\n%s\n", game.map[i], game.mapcopy[i]);
 			i++;
 		}
-		teste(argc, argv);
 	}
 	else
 		printf("faltou argumentos");

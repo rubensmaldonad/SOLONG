@@ -6,7 +6,7 @@ LIB		= ./libft/libft.a
 LIB_D	= ./libft
 
 # SOURCE.C #
-SRC		= teste.c
+SRC		= create_map.c
 
 # COMPILING VARIABLES #
 CC		= cc
@@ -16,7 +16,7 @@ CFLONG	= -Lmlx -lmlx -framework OpenGL -framework Appkit
 
 $(NAME) : $(SRC)
 	Make -C ./libft	
-	$(CC) $(CFLAG) $(SRC) $(LIB) $(CFLONG) -o game
+	$(CC) -g $(CFLAG) $(SRC) $(LIB) $(CFLONG) -o game
 
 all:	$(NAME)
 

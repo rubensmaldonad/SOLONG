@@ -6,7 +6,7 @@
 /*   By: rmaldona <rmaldona@student42.rio>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:17:33 by rmaldona          #+#    #+#             */
-/*   Updated: 2022/06/17 14:56:03 by rmaldona         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:08:15 by rmaldona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
