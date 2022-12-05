@@ -1,3 +1,4 @@
+<<<<<<< HEAD:libft/ft_strrncmp.c
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -30,5 +31,4 @@ int	ft_strrncmp(const char *s1, const char *s2, size_t n)
 		else
 			return (s1[i] - s2[j]);
 	}
-	return (0);
 }
