@@ -6,8 +6,7 @@ LIB		= ./libft/libft.a
 LIB_D	= ./libft
 
 # SOURCE.C #
-SRC		= create_map.c
-
+SRC		= map_validation.c teste.c so_long.c main.c
 # COMPILING VARIABLES #
 CC		= cc
 CFLAG	= -Wall -Wextra -Werror

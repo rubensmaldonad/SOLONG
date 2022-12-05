@@ -6,7 +6,7 @@
 /*   By: rmaldona <rmaldona@student42.rio>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:49:53 by rmaldona          #+#    #+#             */
-/*   Updated: 2022/11/28 17:49:04 by rmaldona         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:44:56 by rmaldona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void create_map(t_game *game, char **argv)
 	len = ft_strlen(bigline);
 	while (lenmap)
 	{
-		if (game->map[0][lenmap] != '1' || game->map[game->lin - 1][lenmap] != '1')
+		if (game->map[0][lenmap] != '1' && game->map[game->lin - 1][lenmap] != '1')
 			m_error("wall invalid");
 		else
 			lenmap--;
 		while (linemap > 0)
 		{
-			if	(game->map[linemap][game->col - 1] != '1' || game->map[linemap][0] != '1')
+			if	(game->map[linemap][game->col - 1] != '1' && game->map[linemap][0] != '1')
 				m_error("wall invalid");
 			else
 				linemap--;
